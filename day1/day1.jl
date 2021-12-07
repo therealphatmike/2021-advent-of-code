@@ -1,3 +1,5 @@
+include("../common.jl")
+
 function did_depth_increment(previous, current)
   return current > previous
 end
@@ -20,19 +22,6 @@ function get_number_of_depth_increments(input)
   return increment_depth_count
 end
 
-function read_data()
-  io = open("day1_data.txt", "r")
-  data = read(io, String)
-  data = split(data, "\n")
-  input = []
-
-  for element in data
-    push!(input, parse(Int64, element))
-  end
-
-  return input
-end
-
 function sum_measurement_tuples(input)
   sums_array = []
   first_measurement = popfirst!(input)
@@ -50,6 +39,6 @@ function sum_measurement_tuples(input)
   return sums_array
 end
 
-day1_data = read_data()
+day1_data = read_data("./day1/day1_data.txt")
 sums = sum_measurement_tuples(day1_data)
 println(get_number_of_depth_increments(sums))
