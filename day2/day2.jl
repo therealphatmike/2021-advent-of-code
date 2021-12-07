@@ -1,7 +1,7 @@
 include("../common.jl")
 
 function get_final_position(input)
-  coordinates = Dict{String, Int64}("z" => 0, "y" => 0)
+  coordinates = Dict{String, Int}("z" => 0, "y" => 0, "aim" => 0)
 
   for movement in input
     vector = split(movement, " ")
@@ -10,10 +10,11 @@ function get_final_position(input)
 
     if direction == "forward"
       coordinates["z"] += scalar
+      coordinates["y"] += (scalar * coordinates["aim"])
     elseif direction == "up"
-      coordinates["y"] -= scalar
+      coordinates["aim"] -= scalar
     elseif direction == "down"
-      coordinates["y"] += scalar
+      coordinates["aim"] += scalar
     else
       throw(DomainError("unrecognized movement direction"))
     end
