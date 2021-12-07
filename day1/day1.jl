@@ -21,7 +21,7 @@ function get_number_of_depth_increments(input)
 end
 
 function read_data()
-  io = open("day1_1_data.txt", "r")
+  io = open("day1_data.txt", "r")
   data = read(io, String)
   data = split(data, "\n")
   input = []
@@ -33,5 +33,23 @@ function read_data()
   return input
 end
 
+function sum_measurement_tuples(input)
+  sums_array = []
+  first_measurement = popfirst!(input)
+  second_measurement = popfirst!(input)
+
+  for element in input
+    third_measurement = element
+
+    push!(sums_array, (first_measurement + second_measurement + third_measurement))
+
+    first_measurement = second_measurement
+    second_measurement = third_measurement
+  end
+
+  return sums_array
+end
+
 day1_data = read_data()
-println(get_number_of_depth_increments(day1_data))
+sums = sum_measurement_tuples(day1_data)
+println(get_number_of_depth_increments(sums))
