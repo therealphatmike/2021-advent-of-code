@@ -24,11 +24,11 @@ end
 
 function sum_measurement_tuples(input)
   sums_array = []
-  first_measurement = popfirst!(input)
-  second_measurement = popfirst!(input)
+  first_measurement = parse(Int, popfirst!(input))
+  second_measurement = parse(Int, popfirst!(input))
 
   for element in input
-    third_measurement = element
+    third_measurement = parse(Int, element)
 
     push!(sums_array, (first_measurement + second_measurement + third_measurement))
 
